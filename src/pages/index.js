@@ -1,150 +1,294 @@
-import * as React from "react"
+import React from 'react';
+import { Link } from 'gatsby';
+import { css } from 'styled-components';
+import Layout from '../components/layout';
 
-// styles
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
-const headingAccentStyles = {
-  color: "#663399",
-}
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
-const listStyles = {
-  marginBottom: 96,
-  paddingLeft: 0,
-}
-const listItemStyles = {
-  fontWeight: "300",
-  fontSize: "24px",
-  maxWidth: "560px",
-}
+import styled from 'styled-components';
+import ButtonBg from '../images/button-bg.svg';
+import IntroBlob from '../images/intro-blob.svg';
 
-const linkStyle = {
-  color: "#8954A8",
-  fontWeight: "bold",
-  fontSize: "16px",
-  verticalAlign: "5%",
-}
+import TransitionLink from 'gatsby-plugin-transition-link';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
-const docLinkStyle = {
-  ...linkStyle,
-  listStyleType: "none",
-  marginBottom: 24,
-}
+const breakpoints = [900, 1440];
 
-const descriptionStyle = {
-  color: "#232129",
-  fontSize: "14px",
-}
+const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-const docLink = {
-  text: "Documentation",
-  url: "https://www.gatsbyjs.com/docs/",
-  color: "#8954A8",
-}
-// data
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial/",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-    color: "#E95800",
-  },
-  {
-    text: "How to Guides",
-    url: "https://www.gatsbyjs.com/docs/how-to/",
-    description:
-      "Practical step-by-step guides to help you achieve a specific goal. Most useful when you're trying to get something done.",
-    color: "#1099A8",
-  },
-  {
-    text: "Reference Guides",
-    url: "https://www.gatsbyjs.com/docs/reference/",
-    description:
-      "Nitty-gritty technical descriptions of how Gatsby works. Most useful when you need detailed information about Gatsby's APIs.",
-    color: "#BC027F",
-  },
-  {
-    text: "Conceptual Guides",
-    url: "https://www.gatsbyjs.com/docs/conceptual/",
-    description:
-      "Big-picture explanations of higher-level Gatsby concepts. Most useful for building understanding of a particular topic.",
-    color: "#0D96F2",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-    color: "#000000",
-  },
-]
+const Container = styled.section`
+	max-width: 140rem;
+	margin: 0 auto;
+	padding: 0 4rem;
+`;
 
-// markup
-const IndexPage = () => {
-  return (
-    <main style={pageStyles}>
-      <title>Home Page</title>
-      <h1 style={headingStyles}>
-        Congratulations
-        <br />
-        <span style={headingAccentStyles}>— you just made a Gatsby site! </span>
-        <span role="img" aria-label="Party popper emojis">
-          🎉🎉🎉
-        </span>
-      </h1>
-      <p style={paragraphStyles}>
-        Edit <code style={codeStyles}>src/pages/index.js</code> to see this page
-        update in real-time.{" "}
-        <span role="img" aria-label="Sunglasses smiley emoji">
-          😎
-        </span>
-      </p>
-      <ul style={listStyles}>
-        <li style={docLinkStyle}>
-          <a
-            style={linkStyle}
-            href={`${docLink.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-          >
-            {docLink.text}
-          </a>
-        </li>
-        {links.map(link => (
-          <li style={{ ...listItemStyles, color: link.color }}>
-            <span>
-              <a
-                style={linkStyle}
-                href={`${link.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-              >
-                {link.text}
-              </a>
-              <p style={descriptionStyle}>{link.description}</p>
-            </span>
-          </li>
-        ))}
-      </ul>
-      <img
-        alt="Gatsby G Logo"
-        src="data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2a10 10 0 110 20 10 10 0 010-20zm0 2c-3.73 0-6.86 2.55-7.75 6L14 19.75c3.45-.89 6-4.02 6-7.75h-5.25v1.5h3.45a6.37 6.37 0 01-3.89 4.44L6.06 9.69C7 7.31 9.3 5.63 12 5.63c2.13 0 4 1.04 5.18 2.65l1.23-1.06A7.959 7.959 0 0012 4zm-8 8a8 8 0 008 8c.04 0 .09 0-8-8z' fill='%23639'/%3E%3C/svg%3E"
-      />
-    </main>
-  )
-}
+const ViewPort = styled.div`
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+`;
 
-export default IndexPage
+const StyledMainBlock = styled.div`
+	width: 70vw;
+	display: flex;
+	justify-content: center;
+
+	${mq[0]} {
+		width: 100%;
+	}
+`;
+
+const StyledTitle = styled.h1`
+	position: relative;
+	color: #bde4fb;
+	font-size: 5rem;
+	letter-spacing: 2px;
+	line-height: 1.4;
+	font-weight: 300;
+	text-transform: uppercase;
+	font-family: Barlow;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+
+	${mq[0]} {
+		font-size: 4rem;
+	}
+
+	span {
+		font-size: 2rem;
+		text-transform: uppercase;
+		font-weight: 400;
+		letter-spacing: 2px;
+		display: block;
+	}
+`;
+
+const StyledButtons = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 2rem;
+	margin-top: 30vh;
+	width: 25rem;
+
+	a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 0;
+		outline: none;
+		color: var(--pink);
+		cursor: pointer;
+		padding: 1.5rem 0;
+		position: relative;
+		font-size: 2rem;
+		font-family: Tomorrow;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		text-decoration: none;
+		background-color: rgba(10, 11, 25, 0.5);
+		max-width: 20rem;
+		width: 100%;
+		margin-left: auto;
+		overflow: hidden;
+		transition: all 600ms;
+
+		&:before {
+			position: absolute;
+			content: '';
+			border-top: 1px solid rgba(189, 228, 251, 0.2);
+			width: 1rem;
+			height: 1rem;
+			border-right: 1px solid rgba(189, 228, 251, 0.2);
+			top: 0;
+			right: 0;
+			transition: all 600ms;
+		}
+
+		&:after {
+			position: absolute;
+			content: '';
+			border-bottom: 1px solid rgba(189, 228, 251, 0.2);
+			width: 1rem;
+			height: 1rem;
+			border-left: 1px solid rgba(189, 228, 251, 0.2);
+			bottom: 0;
+			left: 0;
+			transition: all 600ms;
+		}
+
+		.text-content {
+			transition: all 600ms;
+		}
+
+		.button-bg {
+			position: absolute;
+			bottom: -4rem;
+			left: -2rem;
+			background-image: url(${ButtonBg.url});
+			background-repeat: no-repeat;
+			background-position: -35px -12px;
+			background-size: cover;
+			width: 100%;
+			height: 169%;
+			z-index: -1;
+			transform: rotate(30deg);
+			transition: all 1s;
+		}
+
+		&:last-child {
+			margin-left: 0;
+
+			.button-bg {
+				background-position: 10px -10px;
+				transform: none;
+				bottom: initial;
+				left: initial;
+			}
+		}
+
+		&:hover {
+			.button-bg {
+				transform: scale(3);
+			}
+
+			&:before,
+			&:after {
+				width: 2rem;
+				height: 2rem;
+				border-color: rgba(189, 228, 251, 1);
+			}
+
+			.text-content {
+				text-shadow: 0 0 2px rgb(186 123 150 / 0.5),
+					0 0 5px rgb(186 123 150 / 0.1);
+			}
+		}
+	}
+`;
+
+const MarginLi = styled.li`
+	margin-bottom: 2rem;
+`;
+
+const HighlightSpan = styled.span`
+	display: block;
+	width: 5rem;
+	height: 2px;
+	margin-bottom: 1rem;
+	background-color: var(--pink);
+`;
+
+const linkStyle = css`
+	display: block;
+	text-decoration: none;
+	color: #bde4fb;
+	font-size: 2rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: color 300ms;
+	padding: 2rem 5rem;
+	color: var(--pink);
+	margin-right: 1rem;
+
+	&:hover {
+		color: #44318d;
+	}
+`;
+
+const StyledTile = styled.div`
+	position: relative;
+	margin-right: 10vw;
+	margin-top: 20vh;
+
+	svg {
+		position: absolute;
+		top: -9rem;
+		z-index: -2;
+		transform: rotate(-74deg);
+		left: 2rem;
+		opacity: 0.9;
+		width: 31rem;
+	}
+
+	// &:before {
+	//   content: "";
+	//   position: absolute;
+	//   width: 17rem;
+	//   height: 10rem;
+	//   background-color: blue;
+	//   top: -4%;
+	//   left: 12px;
+	//   transform: rotate(23deg);
+	//   background: linear-gradient(
+	//     to bottom,
+	//     rgba(12, 14, 32, 0.2),
+	//     rgba(40, 44, 85, 0.4)
+	//   );
+	// }
+`;
+
+const IndexPage = () => (
+	<Layout>
+		{/* <SEO title="Home" /> */}
+		<ViewPort>
+			<Container>
+				<StyledMainBlock>
+					<div>
+						<StyledTile>
+							<StyledTitle>
+								Sergi Oca
+								<br />
+								<HighlightSpan></HighlightSpan>
+								<span>&nbsp;&nbsp;&nbsp;Web Developer</span>
+								<IntroBlob />
+							</StyledTitle>
+						</StyledTile>
+					</div>
+					<div>
+						<StyledButtons>
+							<AniLink fade to="/projects">
+								<span className="text-content">About</span>
+								<span className="button-bg">
+									<ButtonBg />
+								</span>
+							</AniLink>
+							<AniLink fade to="/projects">
+								<span className="text-content">Projects</span>
+								<span className="button-bg">
+									<ButtonBg />
+								</span>
+							</AniLink>
+						</StyledButtons>
+					</div>
+				</StyledMainBlock>
+			</Container>
+		</ViewPort>
+		{/* <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 320"
+        css={css`
+          position: absolute;
+          bottom: 2px;
+          z-index: 1;
+        `}
+      >
+        <path
+          fill="#ba7ba1"
+          fill-opacity="1"
+          d="M0,128L60,122.7C120,117,240,107,360,117.3C480,128,600,160,720,181.3C840,203,960,213,1080,181.3C1200,149,1320,75,1380,37.3L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+        ></path>
+      </svg> */}
+
+		{/* <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+	<Image />
+	</div> */}
+	</Layout>
+);
+
+export default IndexPage;
