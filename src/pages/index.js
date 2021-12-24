@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { css } from 'styled-components';
 import Layout from '../components/layout';
+import { Blob } from 'react-blob';
 
 import styled from 'styled-components';
 import ButtonBg from '../images/button-bg.svg';
@@ -72,7 +73,7 @@ const StyledButtons = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	gap: 2rem;
+	gap: 4rem;
 	margin-top: 30vh;
 	width: 25rem;
 
@@ -233,43 +234,89 @@ const StyledTile = styled.div`
 	// }
 `;
 
-const IndexPage = () => (
-	<Layout>
-		{/* <SEO title="Home" /> */}
-		<ViewPort>
-			<Container>
-				<StyledMainBlock>
-					<div>
-						<StyledTile>
-							<StyledTitle>
-								Sergi Oca
-								<br />
-								<HighlightSpan></HighlightSpan>
-								<span>&nbsp;&nbsp;&nbsp;Web Developer</span>
-								<IntroBlob />
-							</StyledTitle>
-						</StyledTile>
-					</div>
-					<div>
-						<StyledButtons>
-							<AniLink fade to="/projects">
-								<span className="text-content">About</span>
-								<span className="button-bg">
-									<ButtonBg />
-								</span>
-							</AniLink>
-							<AniLink fade to="/projects">
-								<span className="text-content">Projects</span>
-								<span className="button-bg">
-									<ButtonBg />
-								</span>
-							</AniLink>
-						</StyledButtons>
-					</div>
-				</StyledMainBlock>
-			</Container>
-		</ViewPort>
-		{/* <svg
+const IndexPage = () => {
+	const BackgroundBlob = ({ style, props }) => (
+		<Blob
+			size="80vh"
+			style={{
+				position: 'absolute',
+				bottom: '-30%',
+				left: '-10%',
+				zIndex: -1,
+				backgroundColor: '#21D4FD',
+				color: 'white',
+				opacity: 0.05,
+				fontSize: '50vh',
+				animationDuration: '30s',
+			}}
+		/>
+	);
+
+	return (
+		<Layout>
+			{/* <SEO title="Home" /> */}
+			<ViewPort>
+				<BackgroundBlob />
+				<Container>
+					<StyledMainBlock>
+						<div>
+							<StyledTile>
+								<StyledTitle>
+									Sergi Oca
+									<br />
+									<HighlightSpan></HighlightSpan>
+									<span>&nbsp;&nbsp;&nbsp;Web Developer</span>
+									{/* <IntroBlob /> */}
+									<div
+										css={css`
+											position: absolute;
+											top: -15%;
+											right: -15%;
+											z-index: -1;
+										`}
+									>
+										{/* <Bounce top>
+											<Blob
+												size="20rem"
+												style={{
+													backgroundColor: '#1c1e40',
+													color: 'white',
+													opacity: 0.7,
+													animationDuration: '30s',
+												}}
+											/>
+										</Bounce> */}
+									</div>
+								</StyledTitle>
+							</StyledTile>
+						</div>
+						<div>
+							<StyledButtons>
+								<AniLink
+									paintDrip
+									to="about"
+									duration={1}
+									hex="#0a0b19"
+								>
+									<span className="text-content">About</span>
+									<span className="button-bg">
+										<ButtonBg />
+									</span>
+								</AniLink>
+								<AniLink fade to="/projects">
+									<span className="text-content">
+										Projects
+									</span>
+									<span className="button-bg">
+										<ButtonBg />
+									</span>
+								</AniLink>
+							</StyledButtons>
+						</div>
+					</StyledMainBlock>
+				</Container>
+			</ViewPort>
+			{/* <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1440 320"
         css={css`
@@ -285,10 +332,11 @@ const IndexPage = () => (
         ></path>
       </svg> */}
 
-		{/* <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+			{/* <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
 	<Image />
 	</div> */}
-	</Layout>
-);
+		</Layout>
+	);
+};
 
 export default IndexPage;

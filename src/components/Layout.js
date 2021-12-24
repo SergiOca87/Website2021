@@ -20,6 +20,7 @@ import styled from 'styled-components';
 const Wrapper = styled('div')`
 	min-height: 100vh;
 	height: 100%;
+	overflow: hidden !important;
 	font-family: Alegreya Sans !important;
 	color: #bde4fb;
 `;

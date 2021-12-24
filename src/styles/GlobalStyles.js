@@ -14,12 +14,18 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-size: 2rem;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
   }
 
+  p {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    line-height: 1.4;
+  }
 
 `;
 
