@@ -305,7 +305,7 @@ const IndexPage = () => {
 								</AniLink>
 								<AniLink fade to="/projects">
 									<span className="text-content">
-										Projects
+										Side Projects
 									</span>
 									<span className="button-bg">
 										<ButtonBg />

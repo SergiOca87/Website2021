@@ -4,9 +4,10 @@ module.exports = {
 	},
 	plugins: [
 		'gatsby-plugin-styled-components',
-		'gatsby-plugin-sharp',
 		'gatsby-plugin-react-helmet',
-		'gatsby-transformer-sharp',
+		`gatsby-plugin-image`,
+		`gatsby-plugin-sharp`,
+		`gatsby-transformer-sharp`,
 		{
 			resolve: `gatsby-plugin-transition-link`,
 			options: {

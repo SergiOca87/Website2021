@@ -108,9 +108,9 @@ export default function About() {
 							, where I have completed over 30 projects from
 							inception to delivery, my main focus has been on
 							delivering modern UIs with interesting interactions
-							and a good experience for the clients when it comes
-							to easily creating and editing the content of their
-							websites.
+							for the users and a good experience for the clients
+							when it comes to easily creating and editing the
+							content of their websites.
 						</p>
 						<p>
 							When it comes to personal projects, I am very
@@ -124,7 +124,7 @@ export default function About() {
 								duration={1}
 								hex="#0a0b19"
 							>
-								Projects
+								Side Projects
 							</AniLink>{' '}
 							section.
 						</p>
