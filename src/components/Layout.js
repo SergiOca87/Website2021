@@ -10,9 +10,9 @@ import GlobalStyles from '../styles/GlobalStyles';
 import 'normalize.css';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import '@fontsource/alegreya-sans'; // Defaults to weight 400.
-import '@fontsource/tomorrow'; // Defaults to weight 400.
-import '@fontsource/barlow'; // Defaults to weight 400.
+// import '@fontsource/alegreya-sans'; // Defaults to weight 400.
+// import '@fontsource/tomorrow'; // Defaults to weight 400.
+// import '@fontsource/barlow'; // Defaults to weight 400.
 
 import StyledBackground from '../components/StyledBackground';
 import styled from 'styled-components';
@@ -23,6 +23,7 @@ const Wrapper = styled('div')`
 	overflow: hidden !important;
 	font-family: Alegreya Sans !important;
 	color: #bde4fb;
+	font-display: block;
 `;
 
 const Layout = ({ children }) => {
